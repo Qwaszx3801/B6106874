@@ -1,0 +1,626 @@
+basePath: /api/v1
+definitions:
+  controllers.Scholarship:
+    properties:
+      educationLevelID:
+        type: integer
+      organization:
+        type: string
+      scholarshipName:
+        type: string
+      scholarshipTypeID:
+        type: integer
+      semesterID:
+        type: integer
+      studyPlanID:
+        type: integer
+      userID:
+        type: integer
+    type: object
+  ent.Educationlevel:
+    properties:
+      Educationlevelname:
+        description: Educationlevelname holds the value of the "Educationlevelname" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.EducationlevelEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the EducationlevelQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.EducationlevelEdges:
+    properties:
+      educationlevelID:
+        description: EducationlevelID holds the value of the EducationlevelID edge.
+        items:
+          $ref: '#/definitions/ent.Scholarship'
+        type: array
+    type: object
+  ent.Scholarship:
+    properties:
+      Schlolarshipname:
+        description: Schlolarshipname holds the value of the "Schlolarshipname" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.ScholarshipEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the ScholarshipQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+      organization:
+        description: Organization holds the value of the "organization" field.
+        type: string
+    type: object
+  ent.ScholarshipEdges:
+    properties:
+      educationlevelID:
+        $ref: '#/definitions/ent.Educationlevel'
+        description: EducationlevelID holds the value of the EducationlevelID edge.
+        type: object
+      scholarshiptypeID:
+        $ref: '#/definitions/ent.Scholarshiptype'
+        description: ScholarshiptypeID holds the value of the ScholarshiptypeID edge.
+        type: object
+      semesterID:
+        $ref: '#/definitions/ent.Semester'
+        description: SemesterID holds the value of the SemesterID edge.
+        type: object
+      studyplanID:
+        $ref: '#/definitions/ent.Studyplan'
+        description: StudyplanID holds the value of the StudyplanID edge.
+        type: object
+      userID:
+        $ref: '#/definitions/ent.User'
+        description: UserID holds the value of the UserID edge.
+        type: object
+    type: object
+  ent.Scholarshiptype:
+    properties:
+      Scholarshiptypename:
+        description: Scholarshiptypename holds the value of the "Scholarshiptypename" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.ScholarshiptypeEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the ScholarshiptypeQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.ScholarshiptypeEdges:
+    properties:
+      scholarshiptypeID:
+        description: ScholarshiptypeID holds the value of the ScholarshiptypeID edge.
+        items:
+          $ref: '#/definitions/ent.Scholarship'
+        type: array
+    type: object
+  ent.Semester:
+    properties:
+      Semestername:
+        description: Semestername holds the value of the "Semestername" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.SemesterEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the SemesterQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.SemesterEdges:
+    properties:
+      semesterID:
+        description: SemesterID holds the value of the SemesterID edge.
+        items:
+          $ref: '#/definitions/ent.Scholarship'
+        type: array
+    type: object
+  ent.Studyplan:
+    properties:
+      Studyplanname:
+        description: Studyplanname holds the value of the "Studyplanname" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.StudyplanEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the StudyplanQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.StudyplanEdges:
+    properties:
+      studyplanID:
+        description: StudyplanID holds the value of the StudyplanID edge.
+        items:
+          $ref: '#/definitions/ent.Scholarship'
+        type: array
+    type: object
+  ent.User:
+    properties:
+      Useremail:
+        description: Useremail holds the value of the "Useremail" field.
+        type: string
+      Username:
+        description: Username holds the value of the "Username" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.UserEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the UserQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.UserEdges:
+    properties:
+      userID:
+        description: UserID holds the value of the UserID edge.
+        items:
+          $ref: '#/definitions/ent.Scholarship'
+        type: array
+    type: object
+  gin.H:
+    additionalProperties: true
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server for SUT SE 2563
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: SUT SA Example API
+  version: "1.0"
+paths:
+  /educationlevels:
+    get:
+      description: list educationlevel entities
+      operationId: list-educationlevel
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Educationlevel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List educationlevel entities
+  /educationlevels/{id}:
+    get:
+      description: get educationlevel by ID
+      operationId: get-educationlevel
+      parameters:
+      - description: EducationLevel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Educationlevel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a educationlevel entity by ID
+  /scholarships:
+    get:
+      description: list scholarship entities
+      operationId: list-scholarship
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Scholarship'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List scholarship entities
+    post:
+      consumes:
+      - application/json
+      description: Create scholarship
+      operationId: create-scholarship
+      parameters:
+      - description: Scholarship entity
+        in: body
+        name: scholarship
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.Scholarship'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Scholarship'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create scholarship
+  /scholarships/{id}:
+    get:
+      description: get scholarship by ID
+      operationId: get-scholarship
+      parameters:
+      - description: Scholarship ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Scholarship'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a scholarship entity by ID
+  /scholarshiptypes:
+    get:
+      description: list scholarshiptype entities
+      operationId: list-scholarshiptype
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Scholarshiptype'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List scholarshiptype entities
+  /scholarshiptypes/{id}:
+    get:
+      description: get scholarshiptype by ID
+      operationId: get-scholarshiptype
+      parameters:
+      - description: ScholarshipType ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Scholarshiptype'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a scholarshiptype entity by ID
+  /semesters:
+    get:
+      description: list semester entities
+      operationId: list-semester
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Semester'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List semester entities
+  /semesters/{id}:
+    get:
+      description: get semester by ID
+      operationId: get-semester
+      parameters:
+      - description: Semester ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Semester'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a semester entity by ID
+  /studyplans:
+    get:
+      description: list studyplan entities
+      operationId: list-studyplan
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Studyplan'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List studyplan entities
+  /studyplans/{id}:
+    get:
+      description: get studyplan by ID
+      operationId: get-studyplan
+      parameters:
+      - description: StudyPlan ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Studyplan'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a studyplan entity by ID
+  /users:
+    get:
+      description: list user entities
+      operationId: list-user
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List user entities
+  /users/{id}:
+    get:
+      description: get user by ID
+      operationId: get-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a user entity by ID
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  OAuth2AccessCode:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: accessCode
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Application:
+    flow: application
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Implicit:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: implicit
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    type: oauth2
+  OAuth2Password:
+    flow: password
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      read: ' Grants read access'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+swagger: "2.0"
